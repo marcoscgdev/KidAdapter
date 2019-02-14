@@ -12,6 +12,7 @@ abstract class BaseAdapter<T, H : BaseViewHolder<T>>(protected var itemList: Kid
 
     final override fun onBindViewHolder(holder: H, position: Int) {
         holder.bindView(itemList[position])
+        holder.setIsRecyclable(false)
     }
 
     /**
