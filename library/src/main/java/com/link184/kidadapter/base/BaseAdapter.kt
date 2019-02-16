@@ -9,9 +9,12 @@ abstract class BaseAdapter<T, H : BaseViewHolder<T>>(protected var itemList: Kid
     constructor(itemList: MutableList<T>) : this(KidList(itemList))
 
     override fun getItemCount() = itemList.size
+    
+    var holder: H? = null
 
     final override fun onBindViewHolder(holder: H, position: Int) {
         holder.bindView(itemList[position])
+        this.holder = holder
     }
 
     /**
@@ -135,5 +138,12 @@ abstract class BaseAdapter<T, H : BaseViewHolder<T>>(protected var itemList: Kid
         Collections.swap(itemList, firstIndex, secondIndex)
         notifyItemChanged(firstIndex)
         notifyItemChanged(secondIndex)
+    }
+    
+    fun getAdapterPosition():Int {
+        if (holder != null)
+            return holder.getAdapterPosition()
+        
+        return 0
     }
 }
