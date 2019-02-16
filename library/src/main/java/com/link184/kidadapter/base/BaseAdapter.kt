@@ -10,7 +10,7 @@ abstract class BaseAdapter<T, H : BaseViewHolder<T>>(protected var itemList: Kid
 
     override fun getItemCount() = itemList.size
     
-    var holder: H? = null
+    private var holder: H? = null
 
     final override fun onBindViewHolder(holder: H, position: Int) {
         holder.bindView(itemList[position])
@@ -142,7 +142,7 @@ abstract class BaseAdapter<T, H : BaseViewHolder<T>>(protected var itemList: Kid
     
     fun getAdapterPosition():Int {
         if (holder != null)
-            return holder.getAdapterPosition()
+            return holder!!.adapterPosition
         
         return 0
     }
